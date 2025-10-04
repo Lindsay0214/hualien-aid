@@ -20,9 +20,12 @@ interface VictimAssistanceProps {
   initialCategory?: Category;
 }
 
-export default function VictimAssistance({ initialCategory = "庇護所" }: VictimAssistanceProps) {
+export default function VictimAssistance({
+  initialCategory = "庇護所",
+}: VictimAssistanceProps) {
   const router = useRouter();
-  const [selectedCategory, setSelectedCategory] = useState<Category>(initialCategory);
+  const [selectedCategory, setSelectedCategory] =
+    useState<Category>(initialCategory);
   const [selectedServiceFormat, setSelectedServiceFormat] =
     useState<ServiceFormat>("全部");
   const [shelters, setShelters] = useState<Shelter[]>([]);
@@ -143,29 +146,33 @@ export default function VictimAssistance({ initialCategory = "庇護所" }: Vict
 
       <div className="space-y-4">
         {loading && (
-          <div className="text-center py-8 text-gray-500 dark:text-gray-400">載入中...</div>
+          <div className="text-center py-8 text-gray-500 dark:text-gray-400">
+            載入中...
+          </div>
         )}
 
         {error && (
-          <div className="text-center py-8 text-red-500 dark:text-red-400">錯誤: {error}</div>
-        )}
-
-        {!loading && !error && selectedCategory === "庇護所" && (
-          <div>
-            {shelters.map((shelter) => (
-              <InfoCard
-                key={shelter.id}
-                name={shelter.name}
-                address={shelter.location}
-                contact={shelter.phone}
-                mapUrl={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-                  shelter.location
-                )}`}
-                fullData={shelter}
-              />
-            ))}
+          <div className="text-center py-8 text-red-500 dark:text-red-400">
+            錯誤: {error}
           </div>
         )}
+
+        {!loading &&
+          !error &&
+          selectedCategory === "庇護所" &&
+          shelters.map((shelter) => (
+            <InfoCard
+              key={shelter.id}
+              name={shelter.name}
+              address={shelter.location}
+              contact={shelter.phone}
+              hours={shelter.opening_hours || ""}
+              mapUrl={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                shelter.location
+              )}`}
+              fullData={shelter}
+            />
+          ))}
 
         {!loading && !error && selectedCategory === "醫療站" && (
           <>
@@ -200,7 +207,7 @@ export default function VictimAssistance({ initialCategory = "庇護所" }: Vict
               </div>
             ) : (
               filteredMentalHealthResources.map((resource) => {
-                let displayLocation = "未提供";
+                let displayLocation = "";
                 let mapLocation = null;
 
                 if (resource.location && resource.location !== "string") {

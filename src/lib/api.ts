@@ -103,10 +103,13 @@ export interface Shelter {
   capacity: number | null;
   current_occupancy: number | null;
   available_spaces: number | null;
-  facilities: string | null;
+  facilities: string[] | null;
   contact_person: string;
-  notes: string | null;
-  coordinates: string | null;
+  notes: string;
+  coordinates: {
+    lat: number;
+    lng: number;
+  };
   opening_hours: string | null;
   created_at: number;
   updated_at: number;
