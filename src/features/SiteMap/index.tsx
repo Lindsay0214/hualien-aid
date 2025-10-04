@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import MapInfo from "@/features/MapInfo";
+import MapShow from "@/features/SiteMap/MapShow";
 
 export default function SiteMap() {
   const [showWarningModal, setShowWarningModal] = useState(false);
@@ -113,7 +113,7 @@ export default function SiteMap() {
         </div>
       )}
 
-      <MapInfo />
+      <MapShow />
     </div>
   );
 }

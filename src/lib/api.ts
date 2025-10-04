@@ -21,6 +21,78 @@ export async function fetchAPI<T>(
   return response.json();
 }
 
+export interface ShowerStations {
+  id: string;
+  name: string;
+  location: string;
+  phone: string;
+  status: string;
+  facilities: string | null;
+  notes: string | null;
+  opening_hours: string | null;
+  is_free: boolean;
+  coordinates: {
+    lat: number;
+    lng: number;
+  } | null;
+  created_at: number;
+  updated_at: number;
+}
+
+export interface ShowerStationsResponse {
+  "@context": string;
+  "@type": string;
+  limit: number;
+  member: ShowerStations[];
+  next: string | null;
+  offset: number;
+  previous: string | null;
+  totalItems: number;
+}
+
+export async function getShowerStations(
+  limit: number = 50,
+  offset: number = 0
+): Promise<ShowerStationsResponse> {
+  return fetchAPI<ShowerStationsResponse>("/shower_stations", { limit, offset });
+}
+
+export interface WaterRefillStations {
+  id: string;
+  name: string;
+  location: string;
+  phone: string;
+  status: string;
+  facilities: string | null;
+  notes: string | null;
+  opening_hours: string | null;
+  is_free: boolean;
+  coordinates: {
+    lat: number;
+    lng: number;
+  } | null;
+  created_at: number;
+  updated_at: number;
+}
+
+export interface WaterRefillStationsResponse {
+  "@context": string;
+  "@type": string;
+  limit: number;
+  member: WaterRefillStations[];
+  next: string | null;
+  offset: number;
+  previous: string | null;
+  totalItems: number;
+}
+
+export async function getWaterRefillStations(
+  limit: number = 50,
+  offset: number = 0
+): Promise<ShelterResponse> {
+  return fetchAPI<ShelterResponse>("/water_refill_stations", { limit, offset });
+}
+
 export interface Shelter {
   id: string;
   name: string;
